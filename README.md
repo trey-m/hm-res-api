@@ -33,3 +33,5 @@ A two-channel reservation system with Providers providing availability and clien
 - Roll out strategy
 - Documentation
 - Consider TypeScript
+- Sensible service architecture using established patterns
+- Not sqlite, sometihng like Postgres
