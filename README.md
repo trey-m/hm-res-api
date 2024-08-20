@@ -12,6 +12,7 @@ A two-channel reservation system with Providers providing availability and clien
 - Multiple providers could have same availability, minimum of 1 is required for the input params
 - Clients will call for availability with input ranges
 - Can add expiration time for the reservation record to know when to purge
+- Providers may want to submit recurring availability. Could extend with another table like provider_recurring_availability { dayOfWeek, startTime, endTime, timezone }
 
 # Database Diagram
 
@@ -34,4 +35,4 @@ A two-channel reservation system with Providers providing availability and clien
 - Documentation
 - Consider TypeScript
 - Sensible service architecture using established patterns
-- Not sqlite, sometihng like Postgres
+- Not sqlite, something like Postgres
