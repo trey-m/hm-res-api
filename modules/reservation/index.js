@@ -8,7 +8,7 @@ export default async (f, opts) => {
   f.post('/api/reservation', { schema: reservationSchema }, async (req, reply) => {
     const { date, startTime, endTime, timezone, providerId } = req.body;
 
-    const dto = await ReservationService.book({ date, startTime, endTime, timezone, providerId, clientId });
+    const dto = await ReservationService.reserve({ date, startTime, endTime, timezone, providerId, clientId });
 
     reply.code(201).send(dto);
   });

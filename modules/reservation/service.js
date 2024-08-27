@@ -2,8 +2,8 @@ import prisma from '../../prisma/index.js';
 import { ReservationStatus } from '@prisma/client';
 
 class ReservationService {
-  async book({ date, startTime, endTime, timezone, providerId, clientId }) {
-    const slotBooked = await prisma.reservation.findFirst({
+  async reserve({ date, startTime, endTime, timezone, providerId, clientId }) {
+    const slotReserved = await prisma.reservation.findFirst({
       where: {
         status: {
           in: [ReservationStatus.PENDING, ReservationStatus.COMPLETED],
@@ -33,10 +33,10 @@ class ReservationService {
       },
     });
 
-    if (slotBooked) {
+    if (slotReserved) {
       const err = new Error();
       err.statusCode = 400;
-      err.message = `Slot already booked for ${date} @ ${startTime}-${endTime}`;
+      err.message = `Time slot already reserved for ${date} @ ${startTime}-${endTime}`;
       throw err;
     }
 

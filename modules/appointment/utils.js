@@ -22,9 +22,9 @@ function createIntervals(start, end, intervalMinutes) {
   return intervals;
 }
 
-// Helper function to check if an interval overlaps with any booked slot
-function isBooked(interval, bookedSlots, timezone) {
-  const bookings = bookedSlots.some((slot) => {
+// Helper function to check if an interval overlaps with any reserved slot
+function isReserved(interval, reservations, timezone) {
+  const bookings = reservations.some((slot) => {
     const bookedStart = parseDateTime(slot.date, slot.startTime, timezone);
     const bookedEnd = parseDateTime(slot.date, slot.endTime, timezone);
     return isBefore(interval.start, bookedEnd) && isAfter(interval.end, bookedStart);
@@ -33,7 +33,7 @@ function isBooked(interval, bookedSlots, timezone) {
   return bookings;
 }
 
-function findAvailableAppointmentIntervals(availability, bookedSlots, timezone = null, intervalMinutes = 15) {
+function findAvailableAppointmentIntervals(availability, reservations, timezone = null, intervalMinutes = 15) {
   let availableAppointmentIntervals = [];
 
   // Process each availability slot
@@ -51,7 +51,7 @@ function findAvailableAppointmentIntervals(availability, bookedSlots, timezone =
         (isEqual(interval.start, availabilityStart) && isBefore(interval.end, availabilityEnd)) ||
         isEqual(interval.end, availabilityEnd);
 
-      if (isWithinBounds && !isBooked(interval, bookedSlots, timezone)) {
+      if (isWithinBounds && !isReserved(interval, reservations, timezone)) {
         availableAppointmentIntervals.push({
           startDate: format(interval.start, 'yyyy-MM-dd'),
           endDate: format(interval.end, 'yyyy-MM-dd'),
