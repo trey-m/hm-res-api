@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id String @id @default(uuid()) @db.Uuid
+
+  Reservation Reservation[]
+
+  @@map("client") // Override table name in DB
+}
+
+model Provider {
+  id String @id @default(uuid()) @db.Uuid
+
+  Provider_Availability ProviderAvailability[]
+  Reservation           Reservation[]
+
+  @@map("provider") // Override table name in DB
+}
+
+model Reservation {
+  id         String            @id @default(uuid()) @db.Uuid
+  clientId   String            @db.Uuid
+  providerId String            @db.Uuid
+  date       String
+  startTime  String
+  endTime    String
+  timezone   String
+  status     ReservationStatus
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime?
+
+  client   Client   @relation(fields: [clientId], references: [id])
+  provider Provider @relation(fields: [providerId], references: [id])
+
+  @@map("reservation") // Override table name in DB
+}
+
+model ProviderAvailability {
+  id         String @id @default(uuid()) @db.Uuid
+  providerId String @db.Uuid
+  date       String
+  startTime  String
+  endTime    String
+  timezone   String
+
+  provider Provider @relation(fields: [providerId], references: [id])
+
+  @@index([providerId, date]) // Composite index on providerId and date
+
+  @@map("provider_availability") // Override table name in DB
+}
+
+enum ReservationStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
