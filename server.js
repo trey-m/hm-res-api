@@ -4,6 +4,7 @@ import Prisma from './prisma/index.js';
 
 import availability from './modules/availability/index.js';
 import appointment from './modules/appointment/index.js';
+import reservation from './modules/reservation/index.js';
 
 const server = Fastify({
   logger: {
@@ -31,5 +32,6 @@ server.addHook('onClose', async (f) => {
 
 server.register(availability);
 server.register(appointment);
+server.register(reservation);
 
 await server.listen({ port: 3000 });

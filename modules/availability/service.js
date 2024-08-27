@@ -4,8 +4,12 @@ class AvailabilityService {
   async add({ providerId, date, startTime, endTime, timezone }) {
     const existingAvailability = await prisma.providerAvailability.findFirst({
       where: {
-        providerId,
-        date,
+        providerId: {
+          equals: providerId,
+        },
+        date: {
+          equals: date,
+        },
       },
     });
 
