@@ -22,7 +22,6 @@
     "fastify": "^4.24.3"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
     "lint-staged": "^15.2.9",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
