@@ -1,4 +1,5 @@
 import prisma from '../../prisma/index.js';
+import { RESERVATION_STATUS } from '../reservation/constants.js';
 import { findAvailableAppointmentIntervals } from './utils.js';
 
 class AppointmentService {
@@ -21,7 +22,7 @@ class AppointmentService {
     const reservationsByRange = await prisma.reservation.findMany({
       where: {
         status: {
-          in: ['PENDING', 'COMPLETED'],
+          in: [RESERVATION_STATUS.PENDING, RESERVATION_STATUS.CONFIRMED],
         },
         date: {
           gte: startDate,
