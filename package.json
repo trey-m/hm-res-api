@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
+    "test": "vitest run",
     "migrate-create": "prisma migrate dev",
     "migrate-deploy": "prisma migrate deploy",
     "pretty": "prettier --write '*.{js,json,md}'"
