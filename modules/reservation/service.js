@@ -48,7 +48,7 @@ class ReservationService {
         timezone,
         providerId,
         clientId,
-        status: RESERVATION_STATUS.PENDING,
+        status: ReservationStatus.PENDING,
       },
       select: {
         id: true,
