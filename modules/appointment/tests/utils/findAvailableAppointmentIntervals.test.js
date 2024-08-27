@@ -113,4 +113,13 @@ describe('findAvailableAppointmentIntervals', () => {
 
     expect(result).toHaveLength(2);
   });
+
+  it(`Should return 6 intervals due to 2 bookings WITHOUT timezone`, () => {
+    const result = findAvailableAppointmentIntervals(f.availability, f.bookedSlots, null, f.intervalMinutes);
+
+    expect(result[0].startTime).toEqual('05:00');
+    expect(result[0].endTime).toEqual('05:15');
+
+    expect(result).toHaveLength(6);
+  });
 });
