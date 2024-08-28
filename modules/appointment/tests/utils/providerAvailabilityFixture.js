@@ -1,4 +1,4 @@
-export default function (overrides = {}) {
+export default function (overrides = {}, append = []) {
   const data = [
     {
       id: 'd69cb354-2852-4b6a-88ea-91832914d9e9',
@@ -9,6 +9,7 @@ export default function (overrides = {}) {
       timezone: 'America/New_York',
       ...overrides,
     },
+    ...append,
   ];
 
   return data;

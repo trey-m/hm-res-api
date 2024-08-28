@@ -27,5 +27,5 @@ export default function (overrides = {}, firstOnly = false) {
     },
   ];
 
-  return firstOnly ? [data[0]] : data;
+  return firstOnly ? data[0] : data;
 }

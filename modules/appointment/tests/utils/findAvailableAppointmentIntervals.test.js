@@ -66,4 +66,37 @@ describe('findAvailableAppointmentIntervals', () => {
 
     expect(result).toHaveLength(6);
   });
+
+  it(`Multiple providers with same availability overlapping, should return 2 available slots`, () => {
+    const addAvailability = [
+      {
+        id: 'd69cb354-2852-4b6a-88ea-91832914d9e9',
+        providerId: '5dbfe0b4-1f5a-4f55-ac69-d4082fedf70b',
+        date: '2024-08-26',
+        startTime: '09:00',
+        endTime: '09:15',
+        timezone: 'America/New_York',
+      },
+      {
+        id: 'd69cb354-2852-4b6a-88ea-91832914d9e9',
+        providerId: '5dbfe0b4-1f5a-4f55-ac69-d4082fedf70d',
+        date: '2024-08-26',
+        startTime: '09:00',
+        endTime: '09:15',
+        timezone: 'America/New_York',
+      },
+    ];
+
+    const resFixture = reservationFixture({ startTime: '09:00', endTime: '09:15' }, true);
+
+    const result = findAvailableAppointmentIntervals(
+      providerAvailabilityFixture({ startTime: '09:00', endTime: '09:15' }, addAvailability),
+      [resFixture],
+      TZ,
+      intervalMinutes
+    );
+
+    expect(result).toHaveLength(2);
+    expect(result.find((availability) => availability.providerId === resFixture.providerId)).toBeFalsy();
+  });
 });
