@@ -6,32 +6,50 @@ import availability from './modules/availability/index.js';
 import appointment from './modules/appointment/index.js';
 import reservation from './modules/reservation/index.js';
 
-const server = Fastify({
-  logger: {
-    transport: {
-      target: '@fastify/one-line-logger',
-    },
-  },
-});
+export const app = async (opts) => {
+  const f = Fastify(opts);
 
-await server.register(FastifyFormBody);
+  await f.register(FastifyFormBody);
 
-server.setErrorHandler((error, request, reply) => {
-  reply.status(error.statusCode || 500);
+  f.setErrorHandler((error, request, reply) => {
+    reply.status(error.statusCode || 500);
 
-  reply.send({
-    statusCode: error.statusCode || 500,
-    message: error.message || 'Internal Server Error',
-    stack: error.stack,
+    reply.send({
+      statusCode: error.statusCode || 500,
+      message: error.message || 'Internal Server Error',
+      stack: error.stack,
+    });
   });
-});
 
-server.addHook('onClose', async (f) => {
-  await Prisma.$disconnect();
-});
+  f.addHook('onClose', async (f) => {
+    await Prisma.$disconnect();
+  });
 
-server.register(availability);
-server.register(appointment);
-server.register(reservation);
+  f.register(availability);
+  f.register(appointment);
+  f.register(reservation);
 
-await server.listen({ port: 3000 });
+  return f;
+};
+
+async function startServer() {
+  let server;
+  const PORT = 3000;
+  try {
+    server = await app({
+      logger: {
+        transport: {
+          target: '@fastify/one-line-logger',
+        },
+      },
+    });
+
+    await server.listen({ port: PORT });
+    server.log.info(`🚀 Reservation Service Online on port: ${PORT}`);
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
+}
+
+await startServer();

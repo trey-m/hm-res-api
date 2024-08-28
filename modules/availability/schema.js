@@ -1,4 +1,4 @@
-const createAvailabilitySchema = {
+const availabilityCreated = {
   type: 'object',
   properties: {
     date: { type: 'string' },
@@ -27,7 +27,7 @@ const availabilitySchema = {
     },
   },
   response: {
-    201: createAvailabilitySchema,
+    201: availabilityCreated,
   },
 };
 

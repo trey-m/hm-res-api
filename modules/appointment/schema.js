@@ -1,4 +1,4 @@
-const slotSchema = {
+const appointmentSlotSchema = {
   type: 'object',
   properties: {
     startDate: { type: 'string' },
@@ -33,7 +33,7 @@ const appointmentSchema = {
   response: {
     200: {
       type: 'array',
-      items: slotSchema,
+      items: appointmentSlotSchema,
     },
   },
 };
