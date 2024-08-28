@@ -79,8 +79,17 @@ describe('Route Tests', () => {
       providerId: 'UUID',
     };
 
+    const createdResponse = {
+      id: 'd69cb354-2852-4b6a-88ea-91832914d9e9',
+      date: '2024-08-26',
+      startTime: '09:00',
+      endTime: '09:15',
+      timezone: 'America/New_York',
+      providerId: 'UUID',
+    };
+
     Prisma.reservation.findFirst.mockResolvedValue(null);
-    Prisma.reservation.create.mockResolvedValue(createPayload);
+    Prisma.reservation.create.mockResolvedValue(createdResponse);
 
     const response = await fastify.inject({
       method: 'POST',
