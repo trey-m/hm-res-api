@@ -42,7 +42,7 @@ describe('Route Tests', () => {
         endDate: '2024-08-26',
         startTime: '09:00',
         endTime: '17:00',
-        timezone: 'Americas/New_York',
+        timezone: 'America/New_York',
       },
     });
 

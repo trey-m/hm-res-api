@@ -3,7 +3,7 @@ import { findAvailableAppointmentIntervals } from '../../utils.js';
 import providerAvailabilityFixture from './providerAvailabilityFixture.js';
 import reservationFixture from './reservationFixture.js';
 
-const TZ = 'Americas/New_York';
+const TZ = 'America/New_York';
 const intervalMinutes = 15;
 
 describe('findAvailableAppointmentIntervals', () => {
