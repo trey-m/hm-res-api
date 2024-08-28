@@ -1,4 +1,4 @@
-const reservationCreated = {
+const reservationCreatedDTO = {
   type: 'object',
   properties: {
     id: { type: 'string' },
@@ -11,7 +11,7 @@ const reservationCreated = {
   required: ['id', 'date', 'startTime', 'endTime', 'timezone', 'providerId'],
 };
 
-const reservationSchema = {
+const reserveReservationSchema = {
   body: {
     type: 'object',
     properties: {
@@ -24,8 +24,8 @@ const reservationSchema = {
     required: ['date', 'startTime', 'endTime', 'timezone', 'providerId'],
   },
   response: {
-    201: reservationCreated,
+    201: reservationCreatedDTO,
   },
 };
 
-export { reservationSchema };
+export { reserveReservationSchema };

@@ -1,4 +1,4 @@
-const availabilityCreated = {
+const availabilityCreatedDTO = {
   type: 'object',
   properties: {
     date: { type: 'string' },
@@ -10,7 +10,7 @@ const availabilityCreated = {
   required: ['date', 'startTime', 'endTime', 'timezone', 'providerId'],
 };
 
-const availabilitySchema = {
+const addAvailabilitySchema = {
   body: {
     type: 'object',
     required: ['date', 'startTime', 'endTime', 'timezone'],
@@ -27,8 +27,8 @@ const availabilitySchema = {
     },
   },
   response: {
-    201: availabilityCreated,
+    201: availabilityCreatedDTO,
   },
 };
 
-export { availabilitySchema };
+export { addAvailabilitySchema };

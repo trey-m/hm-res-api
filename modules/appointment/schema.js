@@ -11,7 +11,7 @@ const appointmentSlotSchema = {
   required: ['startDate', 'endDate', 'startTime', 'endTime', 'timezone', 'providerId'],
 };
 
-const appointmentSchema = {
+const getAvailableSlotsByRangeSchema = {
   querystring: {
     type: 'object',
     required: ['startDate', 'endDate', 'startTime', 'endTime', 'timezone'],
@@ -38,4 +38,4 @@ const appointmentSchema = {
   },
 };
 
-export { appointmentSchema };
+export { getAvailableSlotsByRangeSchema };
