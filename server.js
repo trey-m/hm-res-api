@@ -35,6 +35,7 @@ export const app = async (opts) => {
 async function startServer() {
   let server;
   const PORT = 3000;
+  const HOST = '0.0.0.0';
   try {
     server = await app({
       logger: {
@@ -44,7 +45,7 @@ async function startServer() {
       },
     });
 
-    await server.listen({ port: PORT });
+    await server.listen({ port: PORT, host: HOST });
     server.log.info(`🚀 Reservation Service Online on port: ${PORT}`);
   } catch (err) {
     console.log(err);
