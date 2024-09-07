@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["nodemon", "--watch", ".", "--ext", "js", "--exec", "node", "server.js"]
+CMD [ "npm", "run", "start" ]
